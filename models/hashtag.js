@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 class Hashtag extends Sequelize.Model {
   static initiate(sequelize) {
     Hashtag.init({
@@ -18,8 +19,10 @@ class Hashtag extends Sequelize.Model {
       collate: 'utf8mb4_general_ci',
     });
   }
+
   static associate(db) {
     db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
   }
 };
+
 module.exports = Hashtag;

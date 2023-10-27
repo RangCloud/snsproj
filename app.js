@@ -5,12 +5,13 @@ const path = require('path');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
+const passport = require('passport');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
-const passportConfig = require('./passport')
+const passportConfig = require('./passport');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -36,10 +37,11 @@ app.use(session({
   },
 }));
 
-app.use('/', pageRouter);
-app.use('/auth', authRouter);
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', pageRouter);
+app.use('/auth', authRouter);
 
 
 sequelize.sync({force:false})

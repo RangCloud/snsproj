@@ -1,10 +1,7 @@
 const express = require('express');
-const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
+const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const { renderProfile, renderJoin, renderMain } = require('../controllers/page');
-
 const router = express.Router();
-
-
 router.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.followerCount = 0;
@@ -12,9 +9,7 @@ router.use((req, res, next) => {
   res.locals.followingIdList = [];
   next();
 });
-
-router.get('/profile', isLoggedIn, renderProfile);
-router.get('/join', isNotLoggedIn, renderJoin);
+router.get('/profile', isLoggedIn, renderProfile); // router.get('/profile', renderProfile);
+router.get('/join', isNotLoggedIn, renderJoin); // router.get('/join', renderJoin);
 router.get('/', renderMain);
-
 module.exports = router;

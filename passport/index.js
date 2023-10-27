@@ -4,7 +4,7 @@ const kakao = require('./kakaoStrategy');
 const User = require('../models/user');
 
 module.exports = () => {
-  passport.serializeUser((user, done) => { // 로그인 시 실행
+  passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 

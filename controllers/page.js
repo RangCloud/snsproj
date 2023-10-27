@@ -13,3 +13,4 @@ exports.renderProfile = (req, res) => {
       twits,
     });
   };
+  
