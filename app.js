@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport')
 
@@ -36,8 +37,10 @@ app.use(session({
 }));
 
 app.use('/', pageRouter);
+app.use('/auth', authRouter);
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 sequelize.sync({force:false})
 .then(()=>{console.log('DB ok');})
